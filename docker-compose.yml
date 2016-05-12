@@ -1,0 +1,29 @@
+version: '2'
+services:
+  api:
+    build: ../gear_list_api
+    image: gotascii/gear_list_api
+    volumes:
+      - ../gear_list_api:/opt/gear_list_api
+
+  browser_client:
+    build: ../gear_list_browser_client
+    image: gotascii/gear_list_browser_client
+    volumes:
+      - ../gear_list_browser_client:/opt/gear_list_browser_client
+
+  original:
+    build: ../gear_list
+    image: gotascii/gear_list
+    volumes:
+      - ../gear_list:/opt/gear_list
+
+  haproxy:
+    build: ../gear_list_haproxy
+    image: gotascii/gear_list_haproxy
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+      - browser_client
+      - original
