@@ -1,0 +1,34 @@
+Quickstart
+---
+Clone the following repositories in the same directory as this respository:
+git@github.com:gotascii/gear_list_api.git
+git@github.com:gotascii/gear_list_browser_client.git
+git@github.com:gotascii/gear_list_haproxy.git
+git@github.com:gotascii/gear_list.git
+
+Configure /etc/hosts:
+HOSTIP gear-list.com original.gear-list.com api.gear-list.com browser-sync.gear-list.com
+
+Run `docker-compose up`.
+
+.env
+---
+Sets the `gearlist` name used in generation of container names.
+
+Architecture
+---
+There are 4 services defined in docker-compose.yml
+
+api             rails-api service provides jsonapi api.
+browser_client  static angular2 browser client server and browsersync ui.
+original        rails 4 mvc application.
+haproxy         haproxy router.
+
+TODO:
+HTTPS
+OAUTH2 + JWT implicit authentication for SPA.
+Scale api & browser_client nodes via docker-compose, respecting haproxy config.
+https://github.com/cgmartin/angular-spa-browserify-example-docker/tree/master/haproxy
+
+Dive into haproxy config options a bit more.
+https://cbonte.github.io/haproxy-dconv/configuration-1.6.html
